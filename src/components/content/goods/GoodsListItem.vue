@@ -21,9 +21,9 @@ export default {
   name:'GoodsListItem',
   props: {
     floordata: {
-      type: Object,
+      type: Array,
       default() {
-        return {}
+        return []
       }
     }
   },

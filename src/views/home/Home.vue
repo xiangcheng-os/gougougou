@@ -5,10 +5,7 @@
     <home-swiper :swiperdata="swiperdata"/>
     <recommend-view :catitems="catitems"></recommend-view>
     <goods-list-item :floordata="floordata"></goods-list-item>
-    
-    
-    
-
+  
   </div>
   
   
@@ -18,6 +15,7 @@
 <script>
 import Search from 'components/common/search/Search'
 import {getHomeRecommenddata,getHomeMultidata,getHomeGoods} from "../../network/home";
+import {getHomeSearch,getqSearch} from "../../network/search"
 import HomeSwiper from './childComps/HomeSwiper'
 import RecommendView from './childComps/RecommendView'
 import GoodsListItem from '../../components/content/goods/GoodsListItem'
@@ -40,7 +38,7 @@ export default {
     return {
       swiperdata: [],
       catitems: [],
-      floordata:{},
+      floordata:[],
       search:[],
       qsearch:{}
       
