@@ -1,9 +1,11 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">优购平台</div></nav-bar>
+    <search :search="search"></search>
     <home-swiper :swiperdata="swiperdata"/>
     <recommend-view :catitems="catitems"></recommend-view>
     <goods-list-item :floordata="floordata"></goods-list-item>
+    
     
     
 
@@ -14,7 +16,7 @@
 </template>
 
 <script>
-
+import Search from 'components/common/search/Search'
 import {getHomeRecommenddata,getHomeMultidata,getHomeGoods} from "../../network/home";
 import HomeSwiper from './childComps/HomeSwiper'
 import RecommendView from './childComps/RecommendView'
@@ -30,17 +32,17 @@ export default {
     HomeSwiper,
     RecommendView,
     // Scroll,
-    GoodsListItem
-    
+    GoodsListItem,
+    Search
     
   },
     data (){
     return {
       swiperdata: [],
       catitems: [],
-      floordata:{
-        
-      },
+      floordata:{},
+      search:[],
+      qsearch:{}
       
 
       
@@ -58,6 +60,8 @@ export default {
     this.getHomeRecommenddata()
     this.getHomeGoods('floor_title')
     this.getHomeGoods('product_list')
+    this.getHomeSearch()
+    this.getqSearch()
   
     
   },
@@ -82,6 +86,18 @@ export default {
         console.log(res)
       })
     },
+     getHomeSearch() {
+      getHomeSearch().then(res => {
+        this.search = res.message
+        console.log(res)
+      })
+    },
+    getqSearch() {
+      getqSearch().then(res => {
+        this.qsearch = res.message
+        console.log(res)
+      })
+    }
     
   }
  
