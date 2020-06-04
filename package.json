@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "better-scroll": "^1.15.2",
     "core-js": "^3.6.4",
+    "element-ui": "^2.13.2",
     "loader": "^2.1.1",
     "sass-loader": "^8.0.2",
     "scss": "^0.2.4",
