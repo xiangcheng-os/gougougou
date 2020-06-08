@@ -4,7 +4,7 @@
     <search :search="search"></search>
     <home-swiper :swiperdata="swiperdata"/>
     <recommend-view :catitems="catitems"></recommend-view>
-    <goods-list-item :floordata="floordata"></goods-list-item>
+    <home-floor :message="floordata"></home-floor>
   
   </div>
   
@@ -18,7 +18,7 @@ import {getHomeRecommenddata,getHomeMultidata,getHomeGoods} from "../../network/
 import {getHomeSearch,getqSearch} from "../../network/search"
 import HomeSwiper from './childComps/HomeSwiper'
 import RecommendView from './childComps/RecommendView'
-import GoodsListItem from '../../components/content/goods/GoodsListItem'
+import HomeFloor from './childComps/HomeFloor'
 import TabBar  from 'components/common/tabbar/TabBar'
 import NavBar from 'components/common/navbar/NavBar'
 // import Scorll from 'components/common/scroll/Scroll'
@@ -30,8 +30,8 @@ export default {
     HomeSwiper,
     RecommendView,
     // Scroll,
-    GoodsListItem,
-    Search
+    Search,
+    HomeFloor
     
   },
     data (){

@@ -1,5 +1,11 @@
 <template>
-  <div class="goods-item" @click="itemClick" >
+  <div class="goods-item">
+    <nav-bar class="goods-item-nav">
+      <div slot="left" @click="backClick" class="back-item">
+        <img src="~assets/img/common/back.svg" alt="">
+      </div>
+      <div slot="center">商品列表</div>
+    </nav-bar>
    <div v-for="item in floordata" :key="item.index"> 
      <a :href="item.navigator_url">
        <img :src="item.product_list.image_src" alt="">
