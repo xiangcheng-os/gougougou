@@ -6,36 +6,52 @@
       </div>
       <div slot="center">商品列表</div>
     </nav-bar>
-   <div v-for="item in floordata" :key="item.index"> 
-     <a :href="item.navigator_url">
-       <img :src="item.product_list.image_src" alt="">
-     </a>
-     
-    <div class="goods-info">
-      <a :href="item.navigator_url">
-        <img :src="item.floor_title.image_src" alt="">
-      </a>
-      
+    <search/>
+    <div
+    v-for="(item, index) in goodsList"
+    :key="index"
+    class="item"
+    @click="itemClick(item.goods_id)">
+    <div class="pic">
+      <img :src="item.goods_small_logo" alt="">
     </div>
-    </div>
-
+    <div class="name">{{item.goods_name}}</div>
+    <div class="price">￥{{item.goods_price}}</div>
   </div>
+</div>
 </template>
 
 <script>
+import NavBar from 'components/common/navbar/NavBar'
+import Search from 'components/common/search/Search'
+import {getGoodsList} from 'network/goodlist'
 export default {
   name:'GoodsListItem',
-  props: {
-    floordata: {
-      type: Array,
-      default() {
-        return []
-      }
+  data () {
+    return {
+      name:'',
+      goodsList:[]
     }
   },
+  components: {
+    NavBar,
+    Search
+  },
+  created () {
+    this.name = this.$route.params.name
+    this.getGoodsList()
+  },
   methods: {
-  itemClick() {
-    this.$router.push('/detail/'+this.product_list.navigator_url)
+    getGoodsList() {
+      getGoodsList(this.name).then(res => {
+        this.goodsList = res.data.message.goods
+      })
+    },
+    backClick () {
+      this.router.go(-1)
+    },
+  itemClick(id) {
+    this.$router.push('/detail/'+id)
 
   }
  }

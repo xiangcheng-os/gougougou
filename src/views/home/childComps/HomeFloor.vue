@@ -39,16 +39,19 @@ export default {
 
 .content {
   margin-left:1px;
+  width: 100%;
+  height: 100%;
 }
 
 .content-item {
   float: left;
 }
 .content-item img {
-  width: 179px;
-  height: 130px;
+  width: 100%;
+  height: 100%;
 }
 .first img {
-  height: 264px;
+  height: 100%;
+  width: 100%;
 }
 </style>
