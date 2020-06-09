@@ -11,11 +11,9 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name:"HomeFloor",
@@ -40,15 +38,16 @@ export default {
 .content {
   margin-left:1px;
   width: 100%;
-  height: 100%;
+  
 }
 
 .content-item {
   float: left;
+  width: 33.33%;
 }
 .content-item img {
   width: 100%;
-  height: 100%;
+  height: 27.72711207vw;
 }
 .first img {
   height: 100%;

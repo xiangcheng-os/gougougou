@@ -1,24 +1,20 @@
 <template>
-  <div>
-     <nav-bar class="home-nav"><div slot="center">分类页</div></nav-bar>
+  <div id="detail">
+    <nav-bar>
+      <div slot="left" @click="backClick" class="back-item">
+        <img src="~assets/img/common/back.svg" alt="">
+      </div>
+      <div slot="center">商品详情</div>
+    </nav-bar>
   </div>
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
 export default {
-  name:'Detail',
-  components:{
-    NavBar
-  }
 
 }
 </script>
 
 <style>
-.home-nav{
-  background-color: #f00420;
-  color:#fff;
-}
 
 </style>
