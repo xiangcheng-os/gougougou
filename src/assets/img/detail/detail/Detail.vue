@@ -1,52 +1,56 @@
 <template>
   <div id="detail">
+    <button @click="on">123</button>
     <nav-bar>
       <div slot="left" @click="backClick" class="back-item">
-        <img src="~assets/img/common/back.svg" alt="">
+        <img src="~assets/img/navbar/返回.svg" alt />
       </div>
       <div slot="center">商品详情</div>
     </nav-bar>
-    <detail-swiper :message="detailSwiper"></detail-swiper>
-    <div class="price">￥{{detailData.goods_price}}</div>
-    <div class="title">
-      <div class="title-a">{{detailData.goods_price}}</div>
-      <div class="title-b">
-        <img src="~assets/img/common/collect.svg" alt="">
-        <span>收藏</span>
+    <detail-swiper :message="detailSwiper" />
+    <scroll class="scroll">
+      <div class="price">￥{{detailData.goods_price}}</div>
+      <div class="title">
+        <div class="title-l">{{detailData.goods_name}}</div>
+        <div class="title-r">
+          <img src="~assets/img/detail/收藏.svg" alt />
+          <span>收藏</span>
+        </div>
       </div>
-    </div>
-    <div class="introduce">图文详情</div>
-    <div v-html="detailData.goods_introduce"></div>
-    <detail-bar :message="detailData" 
-    @addCartClick="addCartClick" 
-    class="detail-bar"></detail-bar>
+      <div class="introduce">图文详情</div>
+      <div v-html="detailData.goods_introduce"></div>
+    </scroll>
+    <detail-bar :message="detailData" @addCartClick="addCartClick" class="detail-bar" />
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
-import DetailSwiper from './childDetail/DetailSwiper'
-import DetailBar from './childDetail/DetailBar'
+import Scroll from 'components/common/scroll/Scroll'
+
+import DetailSwiper from './childComps/DetailSwiper'
+import DetailBar from './childComps/DetailBar'
+
 import { getDetailData } from 'network/detail'
+
 export default {
-  name:'Detail',
+  name: 'Detail',
   data () {
     return {
-      id:Number,
-      detailData:{}
+      id: Number,
+      detailData: {}
     }
   },
   components: {
     NavBar,
     DetailSwiper,
-    DetailBar
+    DetailBar,
+    Scroll
   },
   created () {
     this.id = this.$route.params.id
     this.getDetailData()
   },
-
-
   computed: {
     detailSwiper () {
       return this.detailData.pics
@@ -58,6 +62,7 @@ export default {
     },
     getDetailData () {
       getDetailData(this.id).then(res => {
+        // console.log(res)
         this.detailData = res.data.message
       })
     },
@@ -70,9 +75,9 @@ export default {
       product.id = this.detailData.goods_id
       product.name = this.detailData.goods_name
       product.price = this.detailData.goods_price
-      product.pic = this.detailData.goods_logo
+      product.pic = this.detailData.goods_small_logo
       product.count = 0
-      this.$store.dispatch('addCart',product)
+      this.$store.dispatch('addCart', product)
     }
   }
 }
@@ -82,13 +87,19 @@ export default {
 #detail {
   height: 618px;
 }
+
+.scroll {
+  height: 505px;
+  overflow: hidden;
+}
+
 .detail-bar {
   position: relative;
 }
 
 .price {
   color: red;
-  height:42px;
+  height: 42px;
   line-height: 42px;
   padding-left: 10px;
   font-size: 16px;
@@ -101,7 +112,7 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 
-.title-a {
+.title-l {
   margin-top: 5px;
   width: 312px;
   height: 42px;
@@ -111,19 +122,19 @@ export default {
   float: left;
 }
 
-.title-b {
+.title-r {
   float: right;
   width: 60px;
   height: 44px;
   text-align: center;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
-.title-b img {
+.title-r img {
   height: 14px;
 }
 
-.title-b span {
+.title-r span {
   display: block;
 }
 
@@ -144,5 +155,4 @@ export default {
   height: 24px;
   margin-top: 20px;
 }
-
 </style>
